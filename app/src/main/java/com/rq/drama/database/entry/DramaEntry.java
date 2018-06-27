@@ -21,7 +21,12 @@ public class DramaEntry {
   @ColumnInfo(name = "created_at")
   public String createdAt;
 
-  public String thumb;
+  @ColumnInfo(name = "image_url")
+  public String imageUrl;
 
   public float rating;
+
+  @ColumnInfo(name = "image_data",
+      typeAffinity = ColumnInfo.BLOB)
+  public byte[] imageData;
 }

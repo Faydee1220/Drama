@@ -46,7 +46,7 @@ public class DramaListAdapter extends RecyclerView.Adapter<DramaListAdapter.Dram
 
     private void bind(Drama drama) {
       mBinding.setDrama(drama);
-      mPresenter.loadThumb(drama.thumb, mBinding.imageViewDramaList);
+      mPresenter.loadThumb(drama.imageUrl, mBinding.imageViewDramaList);
 
       mBinding.executePendingBindings();
     }

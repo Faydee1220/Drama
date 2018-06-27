@@ -31,7 +31,7 @@ public class Drama {
 
   @SerializedName("thumb")
   @Expose
-  public String thumb;
+  public String imageUrl;
 
   @SerializedName("rating")
   @Expose
