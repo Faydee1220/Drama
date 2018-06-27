@@ -48,8 +48,11 @@ public class DramaListFragment extends Fragment implements DramaListContract.Vie
     super.onViewCreated(view, savedInstanceState);
     LinearLayoutManager layoutManager = new LinearLayoutManager(MyApplication.getAppContext());
     recyclerView.setLayoutManager(layoutManager);
+
     DramaListAdapter adapter = new DramaListAdapter(new ArrayList<>());
     recyclerView.setAdapter(adapter);
+
+    mPresenter.start();
   }
 
   @Override public void onDestroyView() {

@@ -7,10 +7,10 @@ import com.google.gson.annotations.SerializedName;
  * Created by Faydee on 2018/6/27.
  */
 public class Drama {
-  
+
   @SerializedName("drama_id")
   @Expose
-  public long dramaId;
+  public long id;
 
   @SerializedName("name")
   @Expose
@@ -31,5 +31,4 @@ public class Drama {
   @SerializedName("rating")
   @Expose
   public float rating;
-
 }

@@ -5,6 +5,7 @@ import com.rq.drama.api.service.DramaListService;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.rq.drama.model.Constant.API_VERSION;
 import static com.rq.drama.model.Constant.BASE_URL;
@@ -23,6 +24,7 @@ public class ApiManager {
   private ApiManager() {
     Retrofit retrofit = new Retrofit.Builder()
         .baseUrl(BASE_URL + API_VERSION)
+        .addConverterFactory(GsonConverterFactory.create())
         .client(getClient())
         .build();
 
@@ -34,9 +36,9 @@ public class ApiManager {
     OkHttpClient.Builder builder = new OkHttpClient.Builder();
 
     // 需要查看 Call API 的 Log 時才打開
-    HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-    interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-    builder.addInterceptor(interceptor);
+    //HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+    //interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+    //builder.addInterceptor(interceptor);
 
     return builder.build();
   }
