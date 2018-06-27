@@ -1,14 +1,10 @@
 package com.rq.drama.api;
 
 import android.support.annotation.NonNull;
-import java.io.IOException;
-import okhttp3.Interceptor;
+import com.rq.drama.api.service.DramaListService;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.rq.drama.model.Constant.API_VERSION;
 import static com.rq.drama.model.Constant.BASE_URL;
@@ -22,12 +18,15 @@ public class ApiManager {
   public static ApiManager getInstance() {
     return ourInstance;
   }
+  public DramaListService dramaListService;
 
   private ApiManager() {
     Retrofit retrofit = new Retrofit.Builder()
         .baseUrl(BASE_URL + API_VERSION)
         .client(getClient())
         .build();
+
+    dramaListService = retrofit.create(DramaListService.class);
   }
 
   @NonNull
