@@ -8,7 +8,6 @@ import com.rq.drama.api.ApiDramaListManager;
 import com.rq.drama.api.callback.DramaListCallback;
 import com.rq.drama.model.Drama;
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

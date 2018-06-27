@@ -17,7 +17,6 @@ import com.rq.drama.MyApplication;
 import com.rq.drama.R;
 import com.rq.drama.model.Drama;
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -43,7 +42,7 @@ public class DramaListFragment extends Fragment implements DramaListContract.Vie
   @Nullable @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
       @Nullable Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.fragment_dramalist, container, false);
+    View view = inflater.inflate(R.layout.fragment_drama_list, container, false);
     unbinder = ButterKnife.bind(this, view);
     return view;
   }
