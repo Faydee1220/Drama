@@ -30,6 +30,11 @@ public class DramaListAdapter extends RecyclerView.Adapter<DramaListAdapter.Dram
       super(binding.getRoot());
       mBinding = binding;
     }
+
+    private void bind(Drama drama) {
+      mBinding.setDrama(drama);
+      mBinding.executePendingBindings();
+    }
   }
 
   @NonNull @Override
@@ -44,7 +49,7 @@ public class DramaListAdapter extends RecyclerView.Adapter<DramaListAdapter.Dram
   @Override
   public void onBindViewHolder(@NonNull DramaListViewHolder dramaListViewHolder,
       int i) {
-
+    dramaListViewHolder.bind(mDramas.get(i));
   }
 
   @Override public int getItemCount() {
