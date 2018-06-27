@@ -60,4 +60,8 @@ public class DramaListFragment extends Fragment implements DramaListContract.Vie
   @Override public void setPresenter(DramaListContract.Presenter presenter) {
     mPresenter = checkNotNull(presenter);
   }
+
+  @Override public void showDramaList() {
+
+  }
 }

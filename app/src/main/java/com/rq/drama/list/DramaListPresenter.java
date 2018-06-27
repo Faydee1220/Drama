@@ -17,4 +17,8 @@ public class DramaListPresenter implements DramaListContract.Presenter {
   @Override public void start() {
 
   }
+
+  @Override public void loadDramaList() {
+
+  }
 }

@@ -8,10 +8,10 @@ import com.rq.drama.BaseView;
  */
 public interface DramaListContract {
   interface Presenter extends BasePresenter {
-
+    void loadDramaList();
   }
 
   interface View extends BaseView<Presenter> {
-
+    void showDramaList();
   }
 }
