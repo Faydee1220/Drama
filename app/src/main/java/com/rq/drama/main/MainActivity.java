@@ -28,4 +28,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
   @Override public void showDramaDetail(Drama drama) {
     mPresenter.goToDramaDetail();
   }
+
+  @Override public void popBackStack() {
+    mPresenter.popBack();
+  }
 }

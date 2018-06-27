@@ -65,14 +65,24 @@ public class MainPresenter implements MainContract.Presenter {
   @Override public void goToDramaDetail() {
     FragmentTransaction transaction = mFragmentManager.beginTransaction();
     addSlideAnimation(transaction);
-    if (mDramaListFragment != null && !mDramaListFragment.isHidden()) {
-      transaction.hide(mDramaListFragment);
-      transaction.addToBackStack(DRAMA_LIST);
-    }
+    hideDramaList(transaction);
     DramaDetailFragment dramaDetailFragment = DramaDetailFragment.newInstance();
     DramaDetailPresenter presenter = new DramaDetailPresenter(dramaDetailFragment);
     transaction.add(R.id.frameLayout_main_container, dramaDetailFragment, DRAMA_DETAIL);
     transaction.commit();
+  }
+
+  @Override public void popBack() {
+    if (mFragmentManager.getBackStackEntryCount() > 0) {
+      mFragmentManager.popBackStack();
+    }
+  }
+
+  private void hideDramaList(FragmentTransaction transaction) {
+    if (mDramaListFragment != null && !mDramaListFragment.isHidden()) {
+      transaction.hide(mDramaListFragment);
+      transaction.addToBackStack(DRAMA_LIST);
+    }
   }
 
   private void addSlideAnimation(FragmentTransaction transaction) {

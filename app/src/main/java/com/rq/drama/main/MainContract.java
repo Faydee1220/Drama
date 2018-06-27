@@ -11,9 +11,11 @@ public interface MainContract {
   interface Presenter extends BasePresenter {
     void goToDramaList();
     void goToDramaDetail();
+    void popBack();
   }
 
   interface View extends BaseView<Presenter> {
     void showDramaDetail(Drama drama);
+    void popBackStack();
   }
 }

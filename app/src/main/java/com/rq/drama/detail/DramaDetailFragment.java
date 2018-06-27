@@ -4,12 +4,15 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.rq.drama.R;
+import com.rq.drama.main.MainActivity;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -44,5 +47,13 @@ public class DramaDetailFragment extends Fragment implements DramaDetailContract
 
   @Override public void setPresenter(DramaDetailContract.Presenter presenter) {
     mPresenter = checkNotNull(presenter);
+  }
+
+  @OnClick(R.id.imageButton_drama_detail_close)
+  public void closeButtonPressed() {
+    FragmentActivity activity = getActivity();
+    if (activity instanceof MainActivity) {
+      ((MainActivity) activity).popBackStack();
+    }
   }
 }

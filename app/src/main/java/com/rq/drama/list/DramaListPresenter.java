@@ -41,7 +41,7 @@ public class DramaListPresenter implements DramaListContract.Presenter {
 
   @Override public void loadThumb(String url, ImageView imageView) {
     RequestOptions options = new RequestOptions();
-    options = options.placeholder(R.drawable.ic_live_tv_black);
+    options = options.placeholder(R.drawable.ic_live_tv);
     Glide.with(mDramaListView.getFragment())
         .load(url)
         .apply(options)
