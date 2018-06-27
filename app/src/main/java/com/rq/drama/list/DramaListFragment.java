@@ -27,7 +27,7 @@ public class DramaListFragment extends Fragment implements DramaListContract.Vie
   private DramaListContract.Presenter mPresenter;
   private Unbinder unbinder;
 
-  public DramaListFragment() {}
+  public DramaListFragment() { }
 
   public static DramaListFragment newInstance() {
     return new DramaListFragment();

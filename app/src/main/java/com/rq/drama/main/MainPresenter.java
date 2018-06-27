@@ -46,8 +46,12 @@ public class MainPresenter implements MainContract.Presenter {
 
   @Override public void goToDramaList() {
     FragmentTransaction transaction = mFragmentManager.beginTransaction();
-    if (mDramaListFragment == null) mDramaListFragment = DramaListFragment.newInstance();
-    if (mDramaListPresenter == null) mDramaListPresenter = new DramaListPresenter(mDramaListFragment);
+    if (mDramaListFragment == null) {
+      mDramaListFragment = DramaListFragment.newInstance();
+    }
+    if (mDramaListPresenter == null) {
+      mDramaListPresenter = new DramaListPresenter(mDramaListFragment);
+    }
     if (!mDramaListFragment.isAdded()) {
       transaction.add(R.id.frameLayout_main_container, mDramaListFragment, DRAMA_LIST);
     } else {
