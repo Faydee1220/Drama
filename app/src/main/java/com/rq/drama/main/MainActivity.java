@@ -3,6 +3,7 @@ package com.rq.drama.main;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import com.rq.drama.R;
+import com.rq.drama.model.Drama;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -22,5 +23,9 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
 
   @Override public void setPresenter(MainContract.Presenter presenter) {
     mPresenter = checkNotNull(presenter);
+  }
+
+  @Override public void showDramaDetail(Drama drama) {
+    mPresenter.goToDramaDetail();
   }
 }

@@ -7,7 +7,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class DramaDetailPresenter implements DramaDetailContract.Presenter {
 
-
   private DramaDetailContract.View mDramaDetailView;
 
   public DramaDetailPresenter(DramaDetailContract.View dramaDetailView) {

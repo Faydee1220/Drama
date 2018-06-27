@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +16,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import com.rq.drama.MyApplication;
 import com.rq.drama.R;
+import com.rq.drama.main.MainActivity;
 import com.rq.drama.model.Drama;
 import java.util.ArrayList;
 
@@ -57,7 +59,7 @@ public class DramaListFragment extends Fragment implements DramaListContract.Vie
     LinearLayoutManager layoutManager = new LinearLayoutManager(MyApplication.getAppContext());
     recyclerView.setLayoutManager(layoutManager);
 
-    mAdapter = new DramaListAdapter(new ArrayList<>(), mPresenter);
+    mAdapter = new DramaListAdapter(new ArrayList<>(), mPresenter, this);
     recyclerView.setAdapter(mAdapter);
 
     recyclerView.addItemDecoration(new DividerItemDecoration(
@@ -75,6 +77,13 @@ public class DramaListFragment extends Fragment implements DramaListContract.Vie
 
   @Override public void showDramaList(ArrayList<Drama> dramas) {
     mAdapter.updateDramas(dramas);
+  }
+
+  @Override public void showDramaDetail(Drama drama) {
+    FragmentActivity activity = getActivity();
+    if (activity instanceof MainActivity) {
+      ((MainActivity) activity).showDramaDetail(drama);
+    }
   }
 
   @Override public Fragment getFragment() {

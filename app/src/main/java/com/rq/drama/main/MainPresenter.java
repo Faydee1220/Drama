@@ -4,6 +4,8 @@ import android.support.annotation.StringDef;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import com.rq.drama.R;
+import com.rq.drama.detail.DramaDetailFragment;
+import com.rq.drama.detail.DramaDetailPresenter;
 import com.rq.drama.list.DramaListContract;
 import com.rq.drama.list.DramaListFragment;
 import com.rq.drama.list.DramaListPresenter;
@@ -58,5 +60,27 @@ public class MainPresenter implements MainContract.Presenter {
       transaction.show(mDramaListFragment);
     }
     transaction.commit();
+  }
+
+  @Override public void goToDramaDetail() {
+    FragmentTransaction transaction = mFragmentManager.beginTransaction();
+    addSlideAnimation(transaction);
+    if (mDramaListFragment != null && !mDramaListFragment.isHidden()) {
+      transaction.hide(mDramaListFragment);
+      transaction.addToBackStack(DRAMA_LIST);
+    }
+    DramaDetailFragment dramaDetailFragment = DramaDetailFragment.newInstance();
+    DramaDetailPresenter presenter = new DramaDetailPresenter(dramaDetailFragment);
+    transaction.add(R.id.frameLayout_main_container, dramaDetailFragment, DRAMA_DETAIL);
+    transaction.commit();
+  }
+
+  private void addSlideAnimation(FragmentTransaction transaction) {
+    transaction.setCustomAnimations(
+        R.animator.slide_right_in,
+        R.animator.slide_left_out,
+        R.animator.slide_left_in,
+        R.animator.slide_right_out
+    );
   }
 }

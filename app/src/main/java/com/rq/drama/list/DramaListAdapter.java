@@ -19,10 +19,14 @@ public class DramaListAdapter extends RecyclerView.Adapter<DramaListAdapter.Dram
 
   private ArrayList<Drama> mDramas;
   private DramaListContract.Presenter mPresenter;
+  private DramaListContract.View mView;
 
-  public DramaListAdapter(ArrayList<Drama> dramas, DramaListContract.Presenter presenter) {
+  public DramaListAdapter(ArrayList<Drama> dramas,
+      DramaListContract.Presenter presenter,
+      DramaListContract.View view) {
     mDramas = dramas;
     mPresenter = presenter;
+    mView = view;
   }
 
   public void updateDramas(ArrayList<Drama> dramas) {
@@ -49,6 +53,7 @@ public class DramaListAdapter extends RecyclerView.Adapter<DramaListAdapter.Dram
 
     @Override public void onClick(View view) {
       Log.d(TAG, "onClick: " + getAdapterPosition());
+      mView.showDramaDetail(mDramas.get(getAdapterPosition()));
     }
   }
 

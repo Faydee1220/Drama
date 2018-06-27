@@ -19,6 +19,7 @@ public interface DramaListContract {
 
   interface View extends BaseView<Presenter> {
     void showDramaList(ArrayList<Drama> dramas);
+    void showDramaDetail(Drama drama);
     Fragment getFragment();
   }
 }
