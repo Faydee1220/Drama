@@ -5,6 +5,7 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.util.Log;
 import com.rq.drama.MyApplication;
+import com.rq.drama.database.dao.DramaDao;
 import com.rq.drama.database.entry.DramaEntry;
 
 /**
@@ -36,4 +37,6 @@ public abstract class AppDatabase extends RoomDatabase {
     //Log.d(TAG, "Getting the database instance");
     return sInstance;
   }
+
+  public abstract DramaDao dramaDao();
 }
