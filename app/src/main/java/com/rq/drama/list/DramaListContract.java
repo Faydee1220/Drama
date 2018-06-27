@@ -1,4 +1,4 @@
-package com.rq.drama.main;
+package com.rq.drama.list;
 
 import com.rq.drama.BasePresenter;
 import com.rq.drama.BaseView;
@@ -6,9 +6,9 @@ import com.rq.drama.BaseView;
 /**
  * Created by Faydee on 2018/6/27.
  */
-public interface MainContract {
+public interface DramaListContract {
   interface Presenter extends BasePresenter {
-    void goToDramaList();
+
   }
 
   interface View extends BaseView<Presenter> {

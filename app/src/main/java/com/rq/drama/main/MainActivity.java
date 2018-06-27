@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
+    mPresenter = new MainPresenter(this, getSupportFragmentManager());
+    mPresenter.start();
   }
 
   @Override public void setPresenter(MainContract.Presenter presenter) {
