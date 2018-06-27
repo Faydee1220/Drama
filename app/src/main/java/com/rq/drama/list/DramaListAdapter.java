@@ -2,7 +2,9 @@ package com.rq.drama.list;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import com.rq.drama.databinding.ItemDramaListBinding;
 import com.rq.drama.model.Drama;
@@ -28,13 +30,14 @@ public class DramaListAdapter extends RecyclerView.Adapter<DramaListAdapter.Dram
     notifyDataSetChanged();
   }
 
-  class DramaListViewHolder extends RecyclerView.ViewHolder {
+  class DramaListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private ItemDramaListBinding mBinding;
 
     DramaListViewHolder(ItemDramaListBinding binding) {
       super(binding.getRoot());
       mBinding = binding;
+      mBinding.getRoot().setOnClickListener(this);
     }
 
     private void bind(Drama drama) {
@@ -42,6 +45,10 @@ public class DramaListAdapter extends RecyclerView.Adapter<DramaListAdapter.Dram
       mPresenter.loadThumb(drama.thumb, mBinding.imageViewDramaList);
 
       mBinding.executePendingBindings();
+    }
+
+    @Override public void onClick(View view) {
+      Log.d(TAG, "onClick: " + getAdapterPosition());
     }
   }
 
