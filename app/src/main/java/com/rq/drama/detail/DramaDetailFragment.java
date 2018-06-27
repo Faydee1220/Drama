@@ -49,8 +49,8 @@ public class DramaDetailFragment extends Fragment implements DramaDetailContract
     mPresenter = checkNotNull(presenter);
   }
 
-  @OnClick(R.id.imageButton_drama_detail_close)
-  public void closeButtonPressed() {
+  @OnClick(R.id.imageButton_drama_detail_back)
+  public void backButtonPressed() {
     FragmentActivity activity = getActivity();
     if (activity instanceof MainActivity) {
       ((MainActivity) activity).popBackStack();
