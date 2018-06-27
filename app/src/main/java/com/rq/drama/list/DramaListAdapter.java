@@ -2,9 +2,12 @@ package com.rq.drama.list;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.rq.drama.databinding.ItemDramaListBinding;
+import com.rq.drama.model.Drama;
+import java.util.ArrayList;
 
 /**
  * Created by Faydee on 2018/6/27.
@@ -13,11 +16,17 @@ public class DramaListAdapter extends RecyclerView.Adapter<DramaListAdapter.Dram
 
   private static final String TAG = DramaListAdapter.class.getSimpleName();
 
-  public class DramaListViewHolder extends RecyclerView.ViewHolder {
+  private ArrayList<Drama> mDramas;
+
+  public DramaListAdapter(ArrayList<Drama> dramas) {
+    mDramas = dramas;
+  }
+
+  class DramaListViewHolder extends RecyclerView.ViewHolder {
 
     private ItemDramaListBinding mBinding;
 
-    public DramaListViewHolder(ItemDramaListBinding binding) {
+    DramaListViewHolder(ItemDramaListBinding binding) {
       super(binding.getRoot());
       mBinding = binding;
     }
@@ -26,7 +35,10 @@ public class DramaListAdapter extends RecyclerView.Adapter<DramaListAdapter.Dram
   @NonNull @Override
   public DramaListViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup,
       int i) {
-    return null;
+    LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
+    ItemDramaListBinding binding = ItemDramaListBinding
+        .inflate(inflater, viewGroup, false);
+    return new DramaListViewHolder(binding);
   }
 
   @Override
@@ -36,7 +48,7 @@ public class DramaListAdapter extends RecyclerView.Adapter<DramaListAdapter.Dram
   }
 
   @Override public int getItemCount() {
-    return 0;
+    return mDramas.size();
   }
 
 }
