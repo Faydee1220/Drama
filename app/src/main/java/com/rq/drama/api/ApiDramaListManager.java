@@ -4,6 +4,7 @@ import android.util.Log;
 import com.rq.drama.api.callback.DramaListCallback;
 import com.rq.drama.api.response.Result;
 import com.rq.drama.model.Drama;
+import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,6 +40,10 @@ public class ApiDramaListManager {
           Log.d(TAG, "response is not successful, code: " + response.code());
         } else {
           Log.d(TAG, "getDramaList success");
+          Result<List<Drama>> result = response.body();
+          if (result != null && result.data != null) {
+            callback.success(new ArrayList<>(result.data));
+          }
         }
       }
 

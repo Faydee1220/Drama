@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.bumptech.glide.Glide;
 import com.rq.drama.databinding.ItemDramaListBinding;
 import com.rq.drama.model.Drama;
 import java.util.ArrayList;
@@ -17,9 +18,16 @@ public class DramaListAdapter extends RecyclerView.Adapter<DramaListAdapter.Dram
   private static final String TAG = DramaListAdapter.class.getSimpleName();
 
   private ArrayList<Drama> mDramas;
+  private DramaListContract.Presenter mPresenter;
 
-  public DramaListAdapter(ArrayList<Drama> dramas) {
+  public DramaListAdapter(ArrayList<Drama> dramas, DramaListContract.Presenter presenter) {
     mDramas = dramas;
+    mPresenter = presenter;
+  }
+
+  public void updateDramas(ArrayList<Drama> dramas) {
+    mDramas = dramas;
+    notifyDataSetChanged();
   }
 
   class DramaListViewHolder extends RecyclerView.ViewHolder {
@@ -33,6 +41,7 @@ public class DramaListAdapter extends RecyclerView.Adapter<DramaListAdapter.Dram
 
     private void bind(Drama drama) {
       mBinding.setDrama(drama);
+      mPresenter.loadThumb(drama.thumb, mBinding.imageViewDramaList);
       mBinding.executePendingBindings();
     }
   }

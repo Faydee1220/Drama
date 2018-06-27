@@ -14,7 +14,9 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import com.rq.drama.MyApplication;
 import com.rq.drama.R;
+import com.rq.drama.model.Drama;
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -29,6 +31,7 @@ public class DramaListFragment extends Fragment implements DramaListContract.Vie
 
   private DramaListContract.Presenter mPresenter;
   private Unbinder unbinder;
+  private DramaListAdapter mAdapter;
 
   public DramaListFragment() { }
 
@@ -49,8 +52,8 @@ public class DramaListFragment extends Fragment implements DramaListContract.Vie
     LinearLayoutManager layoutManager = new LinearLayoutManager(MyApplication.getAppContext());
     recyclerView.setLayoutManager(layoutManager);
 
-    DramaListAdapter adapter = new DramaListAdapter(new ArrayList<>());
-    recyclerView.setAdapter(adapter);
+    mAdapter = new DramaListAdapter(new ArrayList<>(), mPresenter);
+    recyclerView.setAdapter(mAdapter);
 
     mPresenter.start();
   }
@@ -64,7 +67,11 @@ public class DramaListFragment extends Fragment implements DramaListContract.Vie
     mPresenter = checkNotNull(presenter);
   }
 
-  @Override public void showDramaList() {
+  @Override public void showDramaList(ArrayList<Drama> dramas) {
+    mAdapter.updateDramas(dramas);
+  }
 
+  @Override public Fragment getFragment() {
+    return this;
   }
 }
