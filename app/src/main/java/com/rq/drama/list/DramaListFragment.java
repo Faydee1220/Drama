@@ -50,6 +50,11 @@ public class DramaListFragment extends Fragment implements DramaListContract.Vie
 
   @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
+    setRecyclerView();
+    mPresenter.start();
+  }
+
+  private void setRecyclerView() {
     LinearLayoutManager layoutManager = new LinearLayoutManager(MyApplication.getAppContext());
     recyclerView.setLayoutManager(layoutManager);
 
@@ -58,8 +63,6 @@ public class DramaListFragment extends Fragment implements DramaListContract.Vie
 
     recyclerView.addItemDecoration(new DividerItemDecoration(
         MyApplication.getAppContext(), DividerItemDecoration.VERTICAL));
-
-    mPresenter.start();
   }
 
   @Override public void onDestroyView() {
