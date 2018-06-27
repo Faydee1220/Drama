@@ -28,13 +28,13 @@ public class MainPresenter implements MainContract.Presenter {
   })
   public @interface FragmentType {
   }
-  public static final String DRAMA_LIST = "DRAMA_LIST";
-  public static final String DRAMA_DETAIL = "DRAMA_DETAIL";
+  static final String DRAMA_LIST = "DRAMA_LIST";
+  static final String DRAMA_DETAIL = "DRAMA_DETAIL";
 
   private DramaListFragment mDramaListFragment;
   private DramaListContract.Presenter mDramaListPresenter;
 
-  public MainPresenter(MainContract.View view, FragmentManager fragmentManager) {
+  MainPresenter(MainContract.View view, FragmentManager fragmentManager) {
     mMainView = checkNotNull(view, "mainView cannot be null!");
     mMainView.setPresenter(this);
     mFragmentManager = fragmentManager;
