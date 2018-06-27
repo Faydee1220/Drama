@@ -13,6 +13,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import com.rq.drama.R;
 import com.rq.drama.main.MainActivity;
+import com.rq.drama.model.Drama;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -29,6 +30,7 @@ public class DramaDetailFragment extends Fragment implements DramaDetailContract
   public DramaDetailFragment() { }
 
   public static DramaDetailFragment newInstance() {
+    DramaDetailFragment dramaDetailFragment = new DramaDetailFragment();
     return new DramaDetailFragment();
   }
 
