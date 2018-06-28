@@ -13,7 +13,7 @@ import java.util.List;
 @Dao
 public interface DramaDao {
   @Insert(onConflict = OnConflictStrategy.REPLACE)
-  long insertRun(DramaEntry dramaEntry);
+  long[] insertDramas(List<DramaEntry> dramaEntries);
 
   @Query("SELECT * FROM drama")
   List<DramaEntry> loadAllDramas();

@@ -3,6 +3,9 @@ package com.rq.drama.api;
 import android.util.Log;
 import com.rq.drama.api.callback.DramaListCallback;
 import com.rq.drama.api.response.Result;
+import com.rq.drama.database.AppDatabase;
+import com.rq.drama.database.AppExecutors;
+import com.rq.drama.database.entry.DramaEntry;
 import com.rq.drama.model.Drama;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +29,7 @@ public class ApiDramaListManager {
   private ApiDramaListManager() {
   }
 
+  // region - Request
   public void getDramaList(DramaListCallback callback) {
     Call<Result<List<Drama>>> call = ApiManager.getInstance()
         .dramaListService
@@ -42,6 +46,7 @@ public class ApiDramaListManager {
           Log.d(TAG, "getDramaList success");
           Result<List<Drama>> result = response.body();
           if (result != null && result.data != null) {
+            saveDramas(result.data);
             callback.success(new ArrayList<>(result.data));
           }
         }
@@ -53,4 +58,20 @@ public class ApiDramaListManager {
       }
     });
   }
+  // endregion
+
+  // region - Response
+  private void saveDramas(List<Drama> dramas) {
+    List<DramaEntry> dramaEntries = new ArrayList<>();
+    for (Drama drama : dramas) {
+      DramaEntry dramaEntry = new DramaEntry(drama);
+      dramaEntries.add(dramaEntry);
+    }
+    AppExecutors.getInstance().diskIO().execute(new Runnable() {
+      @Override public void run() {
+        AppDatabase.getInstance().dramaDao().insertDramas(dramaEntries);
+      }
+    });
+  }
+  // endregion
 }
