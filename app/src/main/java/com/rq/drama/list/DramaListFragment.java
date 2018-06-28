@@ -16,6 +16,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import com.rq.drama.MyApplication;
 import com.rq.drama.R;
+import com.rq.drama.database.AppExecutors;
 import com.rq.drama.main.MainActivity;
 import com.rq.drama.model.Drama;
 import java.util.ArrayList;
@@ -76,7 +77,11 @@ public class DramaListFragment extends Fragment implements DramaListContract.Vie
   }
 
   @Override public void showDramaList(ArrayList<Drama> dramas) {
-    mAdapter.updateDramas(dramas);
+    AppExecutors.getInstance().mainThread().execute(new Runnable() {
+      @Override public void run() {
+        mAdapter.updateDramas(dramas);
+      }
+    });
   }
 
   @Override public void showDramaDetail(Drama drama) {

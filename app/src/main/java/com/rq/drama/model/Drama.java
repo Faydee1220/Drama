@@ -2,6 +2,7 @@ package com.rq.drama.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.rq.drama.database.entry.DramaEntry;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -58,5 +59,18 @@ public class Drama {
       e.printStackTrace();
     }
     return "";
+  }
+
+  public Drama() {
+
+  }
+
+  public Drama(DramaEntry dramaEntry) {
+    id = dramaEntry.id;
+    name = dramaEntry.name;
+    totalViews = dramaEntry.totalViews;
+    createdAt = dramaEntry.createdAt;
+    imageUrl = dramaEntry.imageUrl;
+    rating = dramaEntry.rating;
   }
 }
