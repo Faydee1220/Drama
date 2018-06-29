@@ -45,8 +45,7 @@ public class ApiDramaListManager {
           //Log.d(TAG, "getDramaList success");
           Result<List<Drama>> result = response.body();
           if (result != null && result.data != null) {
-            saveDramas(result.data);
-            callback.success(new ArrayList<>(result.data));
+            checkDatabase(result.data, callback);
           }
         }
       }
@@ -60,12 +59,26 @@ public class ApiDramaListManager {
   // endregion
 
   // region - Response
-  private void saveDramas(List<Drama> dramas) {
+  private void checkDatabase(List<Drama> dramas, DramaListCallback callback) {
     AppExecutors.getInstance().diskIO().execute(new Runnable() {
       @Override public void run() {
-        AppDatabase.getInstance().dramaDao().insertDramas(dramas);
+        for (Drama drama : dramas) {
+          Drama dramaFromDb = AppDatabase.getInstance().dramaDao().loadDramaById(drama.id);
+          if (dramaFromDb == null) {
+            //Log.d(TAG, "new drama");
+            AppDatabase.getInstance().dramaDao().insertDrama(drama);
+          } else {
+            //Log.d(TAG, "old drama");
+            if (drama.imageUrl.equals(dramaFromDb.imageUrl)) {
+              drama.imageData = dramaFromDb.imageData;
+            }
+            AppDatabase.getInstance().dramaDao().updateDrama(drama);
+          }
+        }
+        callback.success(new ArrayList<>(AppDatabase.getInstance().dramaDao().loadAllDramas()));
       }
     });
+
   }
   // endregion
 }

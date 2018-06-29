@@ -14,7 +14,7 @@ import java.util.List;
 public interface DramaListContract {
   interface Presenter extends BasePresenter {
     void loadDramaList();
-    void loadThumb(String url, ImageView imageView);
+    void loadThumb(Drama drama, ImageView imageView);
   }
 
   interface View extends BaseView<Presenter> {

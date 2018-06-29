@@ -3,6 +3,7 @@ package com.rq.drama.list;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ public class DramaListAdapter extends RecyclerView.Adapter<DramaListAdapter.Dram
   class DramaListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private ItemDramaListBinding mBinding;
+    private SparseArray<String> binds = new SparseArray<>();
 
     DramaListViewHolder(ItemDramaListBinding binding) {
       super(binding.getRoot());
@@ -46,8 +48,11 @@ public class DramaListAdapter extends RecyclerView.Adapter<DramaListAdapter.Dram
 
     private void bind(Drama drama) {
       mBinding.setDrama(drama);
-      mPresenter.loadThumb(drama.imageUrl, mBinding.imageViewDramaList);
-
+      if (binds.get(getAdapterPosition()) == null
+          || !binds.get(getAdapterPosition()).equals(drama.imageUrl)) {
+        binds.put(getAdapterPosition(), drama.imageUrl);
+        mPresenter.loadThumb(drama, mBinding.imageViewDramaList);
+      }
       mBinding.executePendingBindings();
     }
 
