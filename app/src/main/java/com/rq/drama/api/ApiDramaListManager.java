@@ -5,7 +5,6 @@ import com.rq.drama.api.callback.DramaListCallback;
 import com.rq.drama.api.response.Result;
 import com.rq.drama.database.AppDatabase;
 import com.rq.drama.database.AppExecutors;
-import com.rq.drama.database.entry.DramaEntry;
 import com.rq.drama.model.Drama;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,11 +38,11 @@ public class ApiDramaListManager {
       @Override
       public void onResponse(Call<Result<List<Drama>>> call,
           Response<Result<List<Drama>>> response) {
-        Log.d(TAG, "getDramaList onResponse");
+        //Log.d(TAG, "getDramaList onResponse");
         if (!response.isSuccessful()) {
           Log.d(TAG, "response is not successful, code: " + response.code());
         } else {
-          Log.d(TAG, "getDramaList success");
+          //Log.d(TAG, "getDramaList success");
           Result<List<Drama>> result = response.body();
           if (result != null && result.data != null) {
             saveDramas(result.data);
@@ -62,14 +61,9 @@ public class ApiDramaListManager {
 
   // region - Response
   private void saveDramas(List<Drama> dramas) {
-    List<DramaEntry> dramaEntries = new ArrayList<>();
-    for (Drama drama : dramas) {
-      DramaEntry dramaEntry = new DramaEntry(drama);
-      dramaEntries.add(dramaEntry);
-    }
     AppExecutors.getInstance().diskIO().execute(new Runnable() {
       @Override public void run() {
-        AppDatabase.getInstance().dramaDao().insertDramas(dramaEntries);
+        AppDatabase.getInstance().dramaDao().insertDramas(dramas);
       }
     });
   }

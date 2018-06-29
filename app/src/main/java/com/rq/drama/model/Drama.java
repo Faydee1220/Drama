@@ -1,8 +1,10 @@
 package com.rq.drama.model;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.rq.drama.database.entry.DramaEntry;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,8 +14,10 @@ import java.util.Locale;
 /**
  * Created by Faydee on 2018/6/27.
  */
+@Entity(tableName = "drama")
 public class Drama {
 
+  @PrimaryKey(autoGenerate = true)
   @SerializedName("drama_id")
   @Expose
   public long id;
@@ -22,14 +26,17 @@ public class Drama {
   @Expose
   public String name;
 
+  @ColumnInfo(name = "total_views")
   @SerializedName("total_views")
   @Expose
   public long totalViews;
 
+  @ColumnInfo(name = "created_at")
   @SerializedName("created_at")
   @Expose
   public String createdAt;
 
+  @ColumnInfo(name = "image_url")
   @SerializedName("thumb")
   @Expose
   public String imageUrl;
@@ -37,6 +44,10 @@ public class Drama {
   @SerializedName("rating")
   @Expose
   public float rating;
+
+  @ColumnInfo(name = "image_data",
+      typeAffinity = ColumnInfo.BLOB)
+  public byte[] imageData;
 
   public String getRatingString() {
     NumberFormat format = NumberFormat.getNumberInstance();
@@ -63,14 +74,5 @@ public class Drama {
 
   public Drama() {
 
-  }
-
-  public Drama(DramaEntry dramaEntry) {
-    id = dramaEntry.id;
-    name = dramaEntry.name;
-    totalViews = dramaEntry.totalViews;
-    createdAt = dramaEntry.createdAt;
-    imageUrl = dramaEntry.imageUrl;
-    rating = dramaEntry.rating;
   }
 }

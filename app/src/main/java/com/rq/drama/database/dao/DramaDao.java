@@ -4,7 +4,7 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
-import com.rq.drama.database.entry.DramaEntry;
+import com.rq.drama.model.Drama;
 import java.util.List;
 
 /**
@@ -13,13 +13,13 @@ import java.util.List;
 @Dao
 public interface DramaDao {
   @Insert(onConflict = OnConflictStrategy.REPLACE)
-  long[] insertDramas(List<DramaEntry> dramaEntries);
+  long[] insertDramas(List<Drama> dramaEntries);
 
   @Query("SELECT * FROM drama")
-  List<DramaEntry> loadAllDramas();
+  List<Drama> loadAllDramas();
 
   @Query("SELECT * FROM drama WHERE id = :id")
-  DramaEntry loadDramaById(long id);
+  Drama loadDramaById(long id);
 
   @Query("DELETE FROM drama")
   void deleteAllDramas();

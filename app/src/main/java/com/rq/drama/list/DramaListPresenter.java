@@ -8,7 +8,6 @@ import com.rq.drama.api.ApiDramaListManager;
 import com.rq.drama.api.callback.DramaListCallback;
 import com.rq.drama.database.AppDatabase;
 import com.rq.drama.database.AppExecutors;
-import com.rq.drama.database.entry.DramaEntry;
 import com.rq.drama.model.Drama;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,13 +38,8 @@ public class DramaListPresenter implements DramaListContract.Presenter {
   private void dbGetDramaList() {
     AppExecutors.getInstance().diskIO().execute(new Runnable() {
       @Override public void run() {
-        List<DramaEntry> dramaEntries = AppDatabase.getInstance().dramaDao().loadAllDramas();
-        if (dramaEntries.size() > 0) {
-          List<Drama> dramas = new ArrayList<>();
-          for (DramaEntry dramaEntry : dramaEntries) {
-            Drama drama = new Drama(dramaEntry);
-            dramas.add(drama);
-          }
+        List<Drama> dramas = AppDatabase.getInstance().dramaDao().loadAllDramas();
+        if (dramas.size() > 0) {
           mDramaListView.showDramaList(new ArrayList<>(dramas));
         }
       }

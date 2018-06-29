@@ -3,16 +3,15 @@ package com.rq.drama.database;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
-import android.util.Log;
 import com.rq.drama.MyApplication;
 import com.rq.drama.database.dao.DramaDao;
-import com.rq.drama.database.entry.DramaEntry;
+import com.rq.drama.model.Drama;
 
 /**
  * Created by Faydee on 2018/6/27.
  */
 @Database(entities = {
-    DramaEntry.class},
+    Drama.class},
     version = 1,
     exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
