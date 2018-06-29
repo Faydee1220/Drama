@@ -63,6 +63,7 @@ public class DramaListPresenter implements DramaListContract.Presenter {
     options = options.placeholder(R.drawable.ic_live_tv);
     Glide.with(mDramaListView.getFragment())
         .load(url)
+        .thumbnail(0.25f)
         .apply(options)
         .into(imageView);
   }
